@@ -1,0 +1,31 @@
+---
+title: "Connectedness v. Population"
+author: "Minh Vu"
+format: html
+execute:
+  echo: false
+---
+
+```{r}
+#| label: setup
+#| message: false
+library(tidyverse)
+library(primer.data)
+```
+
+```{r}
+#| label: plot
+connectedness |> 
+  drop_na() |> 
+    ggplot(aes(x = population, y = connectedness)) +
+    geom_point() +
+    geom_smooth(method = "lm", formula = 'y ~ x', se = FALSE) +
+    scale_x_log10(labels = scales::comma_format()) +
+    labs(title = "US County Populations versus Economic Connectedness",
+         subtitle = "Population size does not matter to EC",
+         x = "Population", 
+         y = "Economic Connectedness",
+         caption = "Opportunity Insights")
+```
+
+
